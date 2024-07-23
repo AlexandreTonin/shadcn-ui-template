@@ -1,3 +1,4 @@
+import { LoaderCircle } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
 const signUpForm = z.object({
-  restaurantName: z.string(),
+  establishmentName: z.string(),
   managerName: z.string(),
   phone: z.string(),
   email: z.string().email(),
@@ -28,16 +29,16 @@ export function SignUp() {
 
   async function handleSignUp(data: SignUpForm) {
     try {
+      console.log(data)
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      toast.success('Restaurante cadastrado com sucesso.', {
-        action: {
-          label: 'Login',
-          onClick: () => navigate('/sign-in'),
-        },
-      })
+      toast.success('Successfully created establishment', { duration: 1000 })
+
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
     } catch (error) {
-      toast.error('Erro ao cadastrar restaurante.')
+      toast.error('Error in establishment registration.')
     }
   }
 
@@ -45,63 +46,82 @@ export function SignUp() {
     <>
       <Helmet title="Cadastro" />
       <div className="p-8">
-        <Button variant="ghost" asChild className="absolute right-8 top-8">
-          <Link to="/sign-in">Fazer login</Link>
-        </Button>
         <div className="flex w-[350px] flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
-              Criar conta
+              Create your account
             </h1>
             <p className="text-sm text-muted-foreground">
-              Seja um parceiro e comece suas vendas!
+              Become a partner and start your sales
             </p>
           </div>
 
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="restaurantName"> Nome do estabelecimento</Label>
+              <Label htmlFor="establishmentName"> Establishment name</Label>
               <Input
-                id="restaurantName"
+                id="establishmentName"
                 type="text"
-                {...register('restaurantName')}
+                {...register('establishmentName')}
+                placeholder="Acme"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="managerName"> Seu nome</Label>
+              <Label htmlFor="managerName"> Your name</Label>
               <Input
                 id="managerName"
                 type="text"
                 {...register('managerName')}
+                placeholder="John"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email"> Seu e-mail</Label>
-              <Input id="email" type="email" {...register('email')} />
+              <Label htmlFor="email"> Your e-mail</Label>
+              <Input
+                id="email"
+                type="email"
+                {...register('email')}
+                placeholder="example@acme.com"
+              />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="phone"> Seu celular</Label>
-              <Input id="phone" type="tel" {...register('phone')} />
+              <Label htmlFor="phone"> Your phone</Label>
+              <Input
+                id="phone"
+                type="tel"
+                {...register('phone')}
+                placeholder="+1 999 999-9999"
+              />
             </div>
 
             <Button disabled={isSubmitting} type="submit" className="w-full">
-              Finalizar cadastro
+              {!isSubmitting && 'Create account'}
+              {isSubmitting && <LoaderCircle className="animate-spin" />}
             </Button>
+            <p className="text-sm text-muted-foreground">
+              Don&apos;t have an account?{' '}
+              <Link
+                to="/sign-in"
+                className="text-foreground underline transition hover:text-primary"
+              >
+                Login here
+              </Link>
+            </p>
 
-            <p className="px-6 text-center text-sm leading-relaxed text-muted-foreground">
-              Ao continuar, você concorda com nossos{' '}
+            {/* <p className="px-6 text-center text-sm leading-relaxed text-muted-foreground">
+              By continuing, you agree to our and.{' '}
               <a href="" className="underline-offset-3 underline">
-                termos de serviço
+                terms of service
               </a>{' '}
               e{' '}
               <a href="" className="underline-offset-3 underline">
-                política de privacidade.
+                privacy policy.
               </a>
               .
-            </p>
+            </p> */}
           </form>
         </div>
       </div>
