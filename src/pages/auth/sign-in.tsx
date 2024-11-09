@@ -76,13 +76,17 @@ export function SignIn() {
               Don&apos;t have an account?{' '}
               <Link
                 to="/sign-up"
-                className="text-foreground underline transition hover:text-primary"
+                className="text-foreground underline transition hover:text-muted-foreground"
               >
                 Register here
               </Link>
             </p>
 
-            <Button disabled={isSubmitting} type="submit" className="w-full">
+            <Button
+              disabled={isSubmitting}
+              type="submit"
+              className="w-full text-white dark:text-black"
+            >
               {!isSubmitting && 'Login'}
               {isSubmitting && <LoaderCircle className="animate-spin" />}
             </Button>
