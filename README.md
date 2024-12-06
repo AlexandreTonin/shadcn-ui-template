@@ -23,6 +23,38 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
 ---
 
+## 📂 Estrutura de pastas
+<pre>
+├── public
+│   └── index.html
+├── src
+│   ├── app
+│   │   └── dashboard
+│   ├── components
+│   ├── hooks
+│   ├── lib
+│   ├── pages
+│   ├── App.tsx
+│   ├── global.css
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── .eslintrc.json
+├── .gitignore
+├── README.md
+├── components.json
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── prettier.config.cjs
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+</pre>
+
+---
+
 ## 🚀 Como Executar o Projeto
 
 ### 1️⃣ Clone o repositório
